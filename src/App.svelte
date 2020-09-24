@@ -1,12 +1,17 @@
 <script>
 	import PopulationRow from './PopulationRow.svelte';
-	
-	let regions = [
-		{ name: "China", population: 1433783686 },
-		{ name: "India", population: 1366417754 },
-		{ name: "United States", population: 329064917 },
-		{ name: "Indonesia", population: 270625568 }
-	]
+
+	import Africa from './regions/Africa.json';
+	import Bangladesh from './regions/Bangladesh.json';
+	import Brazil from './regions/Brazil.json';
+	import China from './regions/China.json';
+	import India from './regions/India.json';
+	import Indonesia from './regions/Indonesia.json';
+	import Pakistan from './regions/Pakistan.json';
+	import Russia from './regions/Russia.json';
+	import USA from './regions/USA.json';
+	var regions = [ Africa, Bangladesh, Brazil, China, India, Indonesia, Pakistan, Russia, USA ];
+
 	regions.forEach(region => {
 		region.enabled = true;
 	});
@@ -56,6 +61,4 @@
 	{/each}
 </table>
 
-<p>
-	Total population: {totalPopulation.toLocaleString()}
-</p>
+<p>Total population: {totalPopulation.toLocaleString()}</p>
