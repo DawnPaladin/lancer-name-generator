@@ -16,10 +16,22 @@
 		totalPopulation = 0;
 		regions.forEach(region => {
 			if (region.enabled) totalPopulation += region.population;
-			console.log(region)
 		});
+		regions = regions;
 	}
-	calcPopulation();
+
+	function calcProportion() {
+		regions.forEach(region => {
+			region.proportion = region.enabled ? region.population / totalPopulation : 0;
+		});
+		regions = regions;
+	}
+
+	function update() {
+		calcPopulation();
+		calcProportion();
+	}
+	update();
 	
 </script>
 <style>
@@ -40,7 +52,7 @@
 		</tr>
 	</thead>
 	{#each regions as region (region.name)}
-		<PopulationRow region={region} on:regionUpdate={calcPopulation} />
+		<PopulationRow region={region} on:regionUpdate={update} />
 	{/each}
 </table>
 

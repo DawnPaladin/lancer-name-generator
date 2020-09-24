@@ -31,4 +31,7 @@
 	<td class="align-right">
 		{region.population.toLocaleString()}
 	</td>
+	<td>
+		{region.proportion.toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})}
+	</td>
 </tr>
