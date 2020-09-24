@@ -1,5 +1,6 @@
 <script>
-	import PopulationRow from './PopulationRow.svelte';
+	import PopulationRow from './components/PopulationRow.svelte';
+	import NameRow from './components/NameRow.svelte';
 
 	import Africa from './regions/Africa.json';
 	import Bangladesh from './regions/Bangladesh.json';
@@ -11,6 +12,7 @@
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
 	var regions = [ Africa, Bangladesh, Brazil, China, India, Indonesia, Pakistan, Russia, USA ];
+	var names = [];
 
 	regions.forEach(region => {
 		region.enabled = true;
@@ -37,6 +39,43 @@
 		calcProportion();
 	}
 	update();
+
+	var howManyNames = 100;
+
+	function generateNames() {
+		names = [];
+		for (let counter = 0; counter < howManyNames; counter++) {
+			names.push(generateName());
+		}
+		names = names;
+	}
+	function generateName() {
+		var region = selectRegion();
+		var gender = Math.random() > 0.5 ? "male" : "female";
+		var firstNames = gender == "male" ? region["male-first"] : region["female-first"];
+		var lastNames = region.last;
+		return {
+			first: draw(firstNames),
+			last: draw(lastNames),
+			gender,
+			origin: region.adjective
+		}
+	}
+	function selectRegion() {
+		var selector = Math.random() * totalPopulation; // select number between 0 and totalPopulation
+		console.log("Initial selector", selector, regions);
+
+		// subtract population of each region until the number goes negative
+		for (let region of regions) {
+			console.log(region.name, region.enabled, selector)
+			if (region.enabled) selector -= region.population;
+			if (selector < 0) return region;
+		}
+		return regions[regions.length - 1];
+	}
+	function draw(array) { // randomly select from, as in drawing from a deck of cards
+		return array[Math.floor(Math.random() * array.length)];
+	}
 	
 </script>
 <style>
@@ -62,3 +101,11 @@
 </table>
 
 <p>Total population: {totalPopulation.toLocaleString()}</p>
+
+<button on:click={generateNames}>Generate names</button>
+
+<div class="names">
+	{#each names as name}
+		<NameRow name={name}/>
+	{/each}
+</div>
