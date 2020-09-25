@@ -2,16 +2,17 @@
 	import RegionRow from './components/RegionRow.svelte';
 	import NameRow from './components/NameRow.svelte';
 
-	import Africa from './regions/Africa.json';
 	import Bangladesh from './regions/Bangladesh.json';
 	import Brazil from './regions/Brazil.json';
 	import China from './regions/China.json';
 	import India from './regions/India.json';
 	import Indonesia from './regions/Indonesia.json';
+	import Mexico from './regions/Mexico.json';
+	import Nigeria from './regions/Nigeria.json';
 	import Pakistan from './regions/Pakistan.json';
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
-	var regions = [ Africa, Bangladesh, Brazil, China, India, Indonesia, Pakistan, Russia, USA ];
+	var regions = [ Bangladesh, Brazil, China, India, Indonesia, Mexico, Nigeria, Pakistan, Russia, USA ];
 	var names = [];
 	var tags = true;
 
