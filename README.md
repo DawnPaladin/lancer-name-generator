@@ -1,104 +1,41 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Lancer name generator
 
----
+This is a gamemaster's tool for [Lancer, the Mech RPG](https://massif-press.itch.io/corebook-pdf-free), which takes place far in the future, with humanity spread far into the Milky Way. It generates names from a variety of Earth cultures.
 
-# svelte app
+The app is built using [Svelte](https://svelte.dev). To run it locally, you'll need [NodeJS](https://nodejs.org/en/) installed; clone the repository, run `npm install`, and then run `npm run dev`.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## Contributing
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+Presently the tool knows names from the top ten countries by population plus the continent of Africa. Much of humanity is still unrepresented. I'd like to fix this, and I need your help!
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+To add names from a region of the world, you need to create a JSON file. ([This site](https://jsoneditoronline.org/) is useful for editing JSON files.) Here's how the file should be laid out:
+
+```json
+{
+	"name": "Sampletopia",
+	"adjective": "Samplese",
+	"male-first": [
+		"John",
+		"Joe",
+		"Bob"
+	],
+	"female-first": [
+		"Jane",
+		"Mary",
+		"Emily"
+	],
+	"last": [
+		"Smith",
+		"Johnson",
+		"Williams"
+	]
+}
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+- **name:** Name of the country/region. This will be shown in the list on the left.
+- **adjective:** Adjective form of the name, used in the demographic tags. If the name is "Africa", the adjective is "African".
+- **male-first:** An array of masculine first names. You can put as many of these as you like, but each country should have at least 100.
+- **female-first:** Same as above, but feminine.
+- **last:** An array of last names.
 
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+If you want to open a pull request, the file goes in the /src/regions folder, and you'll need to `import` it at the top of /src/App.svelte and add it to the `regions` array. Or you can just send it to me on Discord - join [Pilot NET](https://discord.gg/rgkbcCt) and send it to DawnPaladin#5461.

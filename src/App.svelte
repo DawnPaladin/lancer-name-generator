@@ -71,12 +71,15 @@
 	}
 	.right-column {
 		min-width: 20em;
-		margin: 3px 0 0 2em;
+		margin: 0 0 0 2em;
+	}
+	.error {
+		font-family: "Courier New", monospace;
 	}
 </style>
 
 <main>
-	
+
 	<h1>Union Population Sampling Tool</h1>
 	
 	<div class="flex-row">
@@ -91,6 +94,9 @@
 				<input type="number" bind:value={sampleSize} style="width: 4em"/>
 			</label>
 			<button on:click={generateNames}>Generate sample</button>
+			<div class="error">
+				[<span style="color: crimson">Error:</span> Missing origins detected. Please install additional origins.]
+			</div>
 		</div>
 		
 		<div class="right-column">

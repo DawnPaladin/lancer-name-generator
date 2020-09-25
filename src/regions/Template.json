@@ -1,0 +1,19 @@
+{
+	"name": "Sampletopia",
+	"adjective": "Samplese",
+	"male-first": [
+		"John",
+		"Joe",
+		"Bob"
+	],
+	"female-first": [
+		"Jane",
+		"Mary",
+		"Emily"
+	],
+	"last": [
+		"Smith",
+		"Johnson",
+		"Williams"
+	]
+}
