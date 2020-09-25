@@ -16,11 +16,7 @@
 	}
 </script>
 
-<tr>
-	<td>
-		<input type="checkbox" bind:checked={region.enabled} on:input={changeCheckbox} />
-	</td>
-	<td>
-		{region.name}
-	</td>
-</tr>
+<label>
+	<input type="checkbox" bind:checked={region.enabled} on:input={changeCheckbox} />
+	{region.name}
+</label>

@@ -13,6 +13,7 @@
 	import USA from './regions/USA.json';
 	var regions = [ Africa, Bangladesh, Brazil, China, India, Indonesia, Pakistan, Russia, USA ];
 	var names = [];
+	var tags = true;
 
 	regions.forEach(region => {
 		region.enabled = true;
@@ -31,17 +32,19 @@
 	}
 	update();
 
-	var howManyNames = 20;
+	var sampleSize = 20;
 
 	function generateNames() {
 		names = [];
-		for (let counter = 0; counter < howManyNames; counter++) {
+		for (let counter = 0; counter < sampleSize; counter++) {
 			names.push(generateName());
 		}
 		names = names;
 	}
+	generateNames();
 	function generateName() {
-		var region = draw(regions);
+		var enabledRegions = regions.filter(region => region.enabled);
+		var region = draw(enabledRegions);
 		var gender = Math.random() > 0.5 ? "male" : "female";
 		var firstNames = gender == "male" ? region["male-first"] : region["female-first"];
 		var lastNames = region.last;
@@ -58,37 +61,50 @@
 	
 </script>
 <style>
-	th {
-		/* text-align: left; */
+	main {
+		margin: auto;
+		max-width: 525px;
 	}
 	.flex-row {
 		display: flex;
 		flex-direction: row;
 	}
+	.right-column {
+		min-width: 20em;
+		margin: 3px 0 0 2em;
+	}
 </style>
 
-<h1>Lancer Name Generator</h1>
-
-<div class="flex-row">
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th>Region</th>
-				</tr>
-			</thead>
+<main>
+	
+	<h1>Union Population Sampling Tool</h1>
+	
+	<div class="flex-row">
+		<div class="left-column">
+			<input type="checkbox" style="visibility: hidden"/> <!-- for spacing -->
+			<strong>Ancestral origin</strong>
 			{#each regions as region (region.name)}
 				<RegionRow region={region} on:regionUpdate={update} />
 			{/each}
-		</table>
+			<label>
+				Sample size:
+				<input type="number" bind:value={sampleSize} style="width: 4em"/>
+			</label>
+			<button on:click={generateNames}>Generate sample</button>
+		</div>
 		
-		<button on:click={generateNames}>Generate names</button>
+		<div class="right-column">
+			<div class="flex-row" style="justify-content: space-between">
+				<strong>Output</strong>
+				<label>
+					<input type="checkbox" bind:checked={tags} /> Demographic tags
+				</label>
+			</div>
+			<div class="names">
+				{#each names as name}
+					<NameRow name={name} tags={tags}/>
+				{/each}
+			</div>
+		</div>
 	</div>
-	
-	<div class="names">
-		{#each names as name}
-			<NameRow name={name}/>
-		{/each}
-	</div>
-</div>
+</main>
