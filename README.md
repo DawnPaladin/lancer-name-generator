@@ -8,7 +8,7 @@ The app is built using [Svelte](https://svelte.dev). To run it locally, you'll n
 
 Presently the tool knows names from the top ten countries by population plus the continent of Africa. Much of humanity is still unrepresented. I'd like to fix this, and I need your help!
 
-To add names from a region of the world, you need to create a JSON file. ([This site](https://jsoneditoronline.org/) is useful for editing JSON files.) Here's how the file should be laid out:
+To add names from a region of the world, you need to create a JSON file. ([This site](https://jsoneditoronline.org/) is useful for editing JSON files.) Here's how [the file](/src/regions/Template.json) should be laid out:
 
 ```json
 {

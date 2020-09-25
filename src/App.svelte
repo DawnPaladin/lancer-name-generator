@@ -95,7 +95,7 @@
 			</label>
 			<button on:click={generateNames}>Generate sample</button>
 			<div class="error">
-				[<span style="color: crimson">Error:</span> Missing origins detected. Please install additional origins.]
+				[<span style="color: crimson">Error:</span> Missing origins detected. Please <a href="https://github.com/DawnPaladin/lancer-name-generator#contributing">install additional origins</a>.]
 			</div>
 		</div>
 		
