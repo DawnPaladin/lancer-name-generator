@@ -1,5 +1,5 @@
 <script>
-	import PopulationRow from './components/PopulationRow.svelte';
+	import RegionRow from './components/RegionRow.svelte';
 	import NameRow from './components/NameRow.svelte';
 
 	import Africa from './regions/Africa.json';
@@ -17,30 +17,21 @@
 	regions.forEach(region => {
 		region.enabled = true;
 	});
-	var totalPopulation = 0;
+	var multiplierTotal = 0;
 	
-	function calcPopulation() {
-		totalPopulation = 0;
-		regions.forEach(region => {
-			if (region.enabled) totalPopulation += region.population;
-		});
-		regions = regions;
-	}
-
 	function calcProportion() {
 		regions.forEach(region => {
-			region.proportion = region.enabled ? region.population / totalPopulation : 0;
+			region.proportion = region.enabled ? region.multiplier / multiplierTotal : 0;
 		});
 		regions = regions;
 	}
 
 	function update() {
-		calcPopulation();
 		calcProportion();
 	}
 	update();
 
-	var howManyNames = 100;
+	var howManyNames = 20;
 
 	function generateNames() {
 		names = [];
@@ -50,7 +41,7 @@
 		names = names;
 	}
 	function generateName() {
-		var region = selectRegion();
+		var region = draw(regions);
 		var gender = Math.random() > 0.5 ? "male" : "female";
 		var firstNames = gender == "male" ? region["male-first"] : region["female-first"];
 		var lastNames = region.last;
@@ -61,18 +52,6 @@
 			origin: region.adjective
 		}
 	}
-	function selectRegion() {
-		var selector = Math.random() * totalPopulation; // select number between 0 and totalPopulation
-		console.log("Initial selector", selector, regions);
-
-		// subtract population of each region until the number goes negative
-		for (let region of regions) {
-			console.log(region.name, region.enabled, selector)
-			if (region.enabled) selector -= region.population;
-			if (selector < 0) return region;
-		}
-		return regions[regions.length - 1];
-	}
 	function draw(array) { // randomly select from, as in drawing from a deck of cards
 		return array[Math.floor(Math.random() * array.length)];
 	}
@@ -80,32 +59,36 @@
 </script>
 <style>
 	th {
-		text-align: left;
+		/* text-align: left; */
+	}
+	.flex-row {
+		display: flex;
+		flex-direction: row;
 	}
 </style>
 
-<h1>Global Name Generator</h1>
+<h1>Lancer Name Generator</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th></th>
-			<th>Region</th>
-			<th>Population</th>
-			<th>Proportion</th>
-		</tr>
-	</thead>
-	{#each regions as region (region.name)}
-		<PopulationRow region={region} on:regionUpdate={update} />
-	{/each}
-</table>
-
-<p>Total population: {totalPopulation.toLocaleString()}</p>
-
-<button on:click={generateNames}>Generate names</button>
-
-<div class="names">
-	{#each names as name}
-		<NameRow name={name}/>
-	{/each}
+<div class="flex-row">
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Region</th>
+				</tr>
+			</thead>
+			{#each regions as region (region.name)}
+				<RegionRow region={region} on:regionUpdate={update} />
+			{/each}
+		</table>
+		
+		<button on:click={generateNames}>Generate names</button>
+	</div>
+	
+	<div class="names">
+		{#each names as name}
+			<NameRow name={name}/>
+		{/each}
+	</div>
 </div>
