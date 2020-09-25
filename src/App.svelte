@@ -32,7 +32,7 @@
 	}
 	update();
 
-	var sampleSize = 20;
+	var sampleSize = 15;
 
 	function generateNames() {
 		names = [];
@@ -63,7 +63,10 @@
 <style>
 	main {
 		margin: auto;
-		max-width: 525px;
+		width: 525px;
+	}
+	h1 {
+		text-align: center;
 	}
 	.flex-row {
 		display: flex;
@@ -75,8 +78,12 @@
 	}
 	.error {
 		font-family: "Courier New", monospace;
+		font-size: 12px;
 	}
 </style>
+<svelte:head>
+	<title>Union Population Sampling Tool</title>
+</svelte:head>
 
 <main>
 
@@ -95,7 +102,7 @@
 			</label>
 			<button on:click={generateNames}>Generate sample</button>
 			<div class="error">
-				[<span style="color: crimson">Error:</span> Missing origins detected. Please <a href="https://github.com/DawnPaladin/lancer-name-generator#contributing">install additional origins</a>.]
+				<span style="color: crimson">//ATTEND//</span> Missing origins detected. Please <a href="https://github.com/DawnPaladin/lancer-name-generator#contributing">install additional origins</a>.
 			</div>
 		</div>
 		
@@ -107,8 +114,8 @@
 				</label>
 			</div>
 			<div class="names">
-				{#each names as name}
-					<NameRow name={name} tags={tags}/>
+				{#each names as name, index (name)}
+					<NameRow name={name} tags={tags} index={index} key={name}/>
 				{/each}
 			</div>
 		</div>
