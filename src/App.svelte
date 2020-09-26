@@ -78,6 +78,23 @@
 	
 </script>
 <style>
+	:global(body) {
+		background: url(/img/hex-grid.png);
+		background-size: 86px 149px;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		:global(body) {
+			animation: drift 20s infinite linear;
+		}
+	}
+	@keyframes drift {
+		from {
+			background-position: 0px 0px;
+		} 
+		to {
+			background-position: -172px -149px;
+		}
+	}
 	main {
 		margin: auto;
 		width: 525px;
