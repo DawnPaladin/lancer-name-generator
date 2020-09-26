@@ -97,6 +97,9 @@
 		font-family: "Courier New", monospace;
 		font-size: 12px;
 	}
+	.names {
+		overflow: hidden;
+	}
 </style>
 <svelte:head>
 	<title>Union Population Sampling Tool</title>
@@ -130,7 +133,7 @@
 					<input type="checkbox" bind:checked={tags} /> Demographic tags
 				</label>
 			</div>
-			<div class="names">
+			<div class="names" style="height: {sampleSize * 1.5}em">
 				{#each names as name, index (name)}
 					<NameRow name={name} tags={tags} index={index} key={name}/>
 				{/each}
