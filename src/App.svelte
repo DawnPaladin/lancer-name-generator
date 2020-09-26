@@ -15,6 +15,9 @@
 	var regions = [ Bangladesh, Brazil, China, India, Indonesia, Mexico, Nigeria, Pakistan, Russia, USA ];
 	var names = [];
 	var tags = true;
+	var sampleSize = 15;
+	var allRegionsEnabled;
+	$: allRegionsEnabled = enabledRegions().length == regions.length;
 
 	regions.forEach(region => {
 		region.enabled = true;
@@ -33,8 +36,6 @@
 	}
 	update();
 
-	var sampleSize = 15;
-
 	function generateNames() {
 		names = [];
 		for (let counter = 0; counter < sampleSize; counter++) {
@@ -44,8 +45,7 @@
 	}
 	generateNames();
 	function generateName() {
-		var enabledRegions = regions.filter(region => region.enabled);
-		var region = draw(enabledRegions);
+		var region = draw(enabledRegions());
 		var gender = Math.random() > 0.5 ? "male" : "female";
 		var firstNames = gender == "male" ? region["male-first"] : region["female-first"];
 		var lastNames = region.last;
@@ -58,6 +58,22 @@
 	}
 	function draw(array) { // randomly select from, as in drawing from a deck of cards
 		return array[Math.floor(Math.random() * array.length)];
+	}
+
+	function enabledRegions() {
+		return regions.filter(region => region.enabled);
+	}
+	function toggleAllRegions() {
+		if (allRegionsEnabled) {
+			regions.forEach(region => { // disable all regions
+				region.enabled = false;
+			});
+		} else {
+			regions.forEach(region => { // enable all regions
+				region.enabled = true;
+			});
+		}
+		regions = regions;
 	}
 	
 </script>
@@ -92,7 +108,7 @@
 	
 	<div class="flex-row">
 		<div class="left-column">
-			<input type="checkbox" style="visibility: hidden"/> <!-- for spacing -->
+			<input type="checkbox" checked={allRegionsEnabled} on:click={toggleAllRegions} />
 			<strong>Ancestral origin</strong>
 			{#each regions as region (region.name)}
 				<RegionRow region={region} on:regionUpdate={update} />

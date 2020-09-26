@@ -5,10 +5,6 @@
 	
 	function changeCheckbox() {
 		region.enabled = !region.enabled;
-		console.log({
-			name: region.name,
-			enabled: region.enabled
-		});
 		dispatch('regionUpdate', {
 			name: region.name,
 			enabled: region.enabled
