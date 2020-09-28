@@ -7,12 +7,13 @@
 	import China from './regions/China.json';
 	import India from './regions/India.json';
 	import Indonesia from './regions/Indonesia.json';
+	import Japan from './regions/Japan.json';
 	import Mexico from './regions/Mexico.json';
 	import Nigeria from './regions/Nigeria.json';
 	import Pakistan from './regions/Pakistan.json';
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
-	var regions = [ Bangladesh, Brazil, China, India, Indonesia, Mexico, Nigeria, Pakistan, Russia, USA ];
+	var regions = [ Bangladesh, Brazil, China, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Russia, USA ];
 	var names = [];
 	var tags = true;
 	var sampleSize = 15;
@@ -110,6 +111,10 @@
 		min-width: 20em;
 		margin: 0 0 0 2em;
 	}
+	.column-header {
+		border-bottom: 1px solid gray;
+		margin-bottom: 3px;
+	}
 	.error {
 		font-family: "Courier New", monospace;
 		font-size: 12px;
@@ -128,8 +133,10 @@
 	
 	<div class="flex-row">
 		<div class="left-column">
-			<input type="checkbox" checked={allRegionsEnabled} on:click={toggleAllRegions} />
-			<strong>Ancestral origin</strong>
+			<div class="column-header">
+				<input type="checkbox" checked={allRegionsEnabled} on:click={toggleAllRegions} />
+				<strong>Ancestral origin</strong>
+			</div>
 			{#each regions as region (region.name)}
 				<RegionRow region={region} on:regionUpdate={update} />
 			{/each}
@@ -144,7 +151,7 @@
 		</div>
 		
 		<div class="right-column">
-			<div class="flex-row" style="justify-content: space-between">
+			<div class="flex-row column-header" style="justify-content: space-between">
 				<strong>Output</strong>
 				<label>
 					<input type="checkbox" bind:checked={tags} /> Demographic tags
@@ -152,7 +159,7 @@
 			</div>
 			<div class="names" style="height: {sampleSize * 1.5}em">
 				{#each names as name, index (name)}
-					<NameRow name={name} tags={tags} index={index} key={name}/>
+					<NameRow name={name} tags={tags} index={index} />
 				{/each}
 			</div>
 		</div>
