@@ -5,6 +5,7 @@
 	import Bangladesh from './regions/Bangladesh.json';
 	import Brazil from './regions/Brazil.json';
 	import China from './regions/China.json';
+	import Ethiopia from './regions/Ethiopia.json';
 	import India from './regions/India.json';
 	import Indonesia from './regions/Indonesia.json';
 	import Japan from './regions/Japan.json';
@@ -13,7 +14,7 @@
 	import Pakistan from './regions/Pakistan.json';
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
-	var regions = [ Bangladesh, Brazil, China, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Russia, USA ];
+	var regions = [ Bangladesh, Brazil, China, Ethiopia, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Russia, USA ];
 	var names = [];
 	var tags = true;
 	var sampleSize = 15;
