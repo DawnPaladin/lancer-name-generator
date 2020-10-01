@@ -12,12 +12,13 @@
 	import Mexico from './regions/Mexico.json';
 	import Nigeria from './regions/Nigeria.json';
 	import Pakistan from './regions/Pakistan.json';
+	import Phillipenes from './regions/Phillipenes.json';
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
-	var regions = [ Bangladesh, Brazil, China, Ethiopia, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Russia, USA ];
+	var regions = [ Bangladesh, Brazil, China, Ethiopia, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA ];
 	var names = [];
 	var tags = true;
-	var sampleSize = 15;
+	var sampleSize = 20;
 	var allRegionsEnabled;
 	$: allRegionsEnabled = enabledRegions().length == regions.length;
 
