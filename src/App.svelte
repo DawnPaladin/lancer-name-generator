@@ -20,7 +20,8 @@
 	var regions = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
 	var names = [];
 	var tags = true;
-	var sampleSize = 20;
+	var mixedAncestries = false;
+	var sampleSize = 25;
 	var allRegionsEnabled;
 	$: allRegionsEnabled = enabledRegions().length == regions.length;
 
@@ -50,15 +51,16 @@
 	}
 	generateNames();
 	function generateName() {
-		var region = draw(enabledRegions());
+		var firstRegion = draw(enabledRegions());
+		var secondRegion = mixedAncestries ? draw(enabledRegions()) : firstRegion;
 		var gender = Math.random() > 0.5 ? "male" : "female";
-		var firstNames = gender == "male" ? region["male-first"] : region["female-first"];
-		var lastNames = region.last;
+		var firstNames = gender == "male" ? firstRegion["male-first"] : firstRegion["female-first"];
+		var lastNames = secondRegion.last;
 		return {
 			first: draw(firstNames),
 			last: draw(lastNames),
 			gender,
-			origin: region.adjective
+			origins: [firstRegion.adjective, secondRegion.adjective]
 		}
 	}
 	function draw(array) { // randomly select from, as in drawing from a deck of cards
@@ -102,7 +104,7 @@
 	}
 	main {
 		margin: auto;
-		width: 525px;
+		width: 600px;
 	}
 	h1 {
 		text-align: center;
@@ -112,7 +114,7 @@
 		flex-direction: row;
 	}
 	.right-column {
-		min-width: 20em;
+		min-width: 25em;
 		margin: 0 0 0 2em;
 	}
 	.column-header {
@@ -148,6 +150,7 @@
 				Sample size:
 				<input type="number" bind:value={sampleSize} style="width: 4em"/>
 			</label>
+			<label><input type="checkbox" bind:checked={mixedAncestries} /> Mixed ancestries</label>
 			<button on:click={generateNames}>Generate sample</button>
 			<div class="error">
 				<span style="color: crimson">//ATTEND//</span> Missing origins detected. Please <a href="https://github.com/DawnPaladin/lancer-name-generator#contributing">install additional origins</a>.
