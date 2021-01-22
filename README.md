@@ -6,7 +6,7 @@ The app is built using [Svelte](https://svelte.dev). To run it locally, you'll n
 
 ## Contributing
 
-Presently the tool knows names from the top ten countries by population. Much of humanity is still unrepresented. I'd like to fix this, and I need your help!
+Presently the tool knows names from the top 15 countries by population. Much of humanity is still unrepresented. I'd like to fix this, and I need your help!
 
 To add names from a region of the world, you need to create a JSON file. ([This site](https://jsoneditoronline.org/) is useful for editing JSON files.) Here's how [the file](/src/regions/Template.json) should be laid out:
 
@@ -38,4 +38,4 @@ To add names from a region of the world, you need to create a JSON file. ([This 
 - **female-first:** Same as above, but feminine.
 - **last:** An array of last names.
 
-If you want to open a pull request, the file goes in the /src/regions folder, and you'll need to `import` it at the top of /src/App.svelte and add it to the `regions` array. Or you can just send it to me on Discord - join [Pilot NET](https://discord.gg/rgkbcCt) and send it to DawnPaladin#5461.
+If you want to open a pull request, the file goes in the /src/regions folder, and you'll need to `import` it at the top of /src/App.svelte and add it to the `regions` array. Or you can just send the JSON file to me on Discord - join [Pilot NET](https://discord.gg/rgkbcCt) and send it to DawnPaladin#5461.
