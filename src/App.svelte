@@ -10,6 +10,7 @@
 	import India from './regions/India.json';
 	import Indonesia from './regions/Indonesia.json';
 	import Japan from './regions/Japan.json';
+	import Korea from './regions/Korea.json';
 	import Mexico from './regions/Mexico.json';
 	import Nigeria from './regions/Nigeria.json';
 	import Pakistan from './regions/Pakistan.json';
@@ -17,7 +18,7 @@
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
 	import Vietnam from './regions/Vietnam.json';
-	var regions = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
+	var regions = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Korea, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
 	var names = [];
 	var tags = true;
 	var mixedAncestries = false;
