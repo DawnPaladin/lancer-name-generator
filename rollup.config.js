@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import css from "rollup-plugin-css-only";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -38,14 +39,13 @@ export default {
 	},
 	plugins: [
 		json({compact: true}),
+
+		css({ output: 'bundle.css' }),
 		
 		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('bundle.css');
+			compilerOptions: {
+				// enable run-time checks when not in production
+				dev: !production
 			}
 		}),
 
@@ -60,13 +60,9 @@ export default {
 		}),
 		commonjs(),
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
+		serve(),
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
+		livereload('public'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
