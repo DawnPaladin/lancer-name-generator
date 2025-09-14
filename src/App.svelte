@@ -18,16 +18,20 @@
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
 	import Vietnam from './regions/Vietnam.json';
-	var regions = $state([ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Korea, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ]);
+
+	const initialData = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Korea, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
+
+	let regions = $state(initialData.map(region => ({
+		...region,
+		enabled: true,
+	})))
+
 	var names = $state([]);
 	var tags = $state(true);
 	var mixedAncestries = $state(false);
 	var sampleSize = $state(25);
 	var allRegionsEnabled = $derived(enabledRegions().length == regions.length);
 
-	regions.forEach(region => {
-		region.enabled = true;
-	});
 	var multiplierTotal = 0;
 	
 	function calcProportion() {
@@ -80,7 +84,6 @@
 				region.enabled = true;
 			});
 		}
-		regions = regions;
 	}
 	
 	
