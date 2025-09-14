@@ -1,13 +1,12 @@
 <script>
 	import { fade, fly } from 'svelte/transition';
 
-	export let name;
-	export let tags;
-	export let index;
+	/** @type {{name: any, tags: any, index: any}} */
+	let { name, tags, index } = $props();
 
-	$: origin = name.origins[0] === name.origins[1]
+	let origin = $derived(name.origins[0] === name.origins[1]
 		? name.origins[0]
-		: `${name.origins[0]}/${name.origins[1]}`;
+		: `${name.origins[0]}/${name.origins[1]}`);
 </script>
 <style>
 	.demographic-tag {
