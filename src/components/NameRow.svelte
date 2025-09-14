@@ -17,6 +17,6 @@
 	}
 </style>
 
-<div in:fly={{ x: 150, duration: 500, delay: 250 + index * 12 }} out:fade={{ duration: 250 }}>
+<div in:fly|global={{ x: 150, duration: 500, delay: 250 + index * 12 }} out:fade|global={{ duration: 250 }}>
 	{ name.first } { name.last }{#if tags}, <span class="demographic-tag">{ name.gender } { origin }</span>{/if}
 </div>
