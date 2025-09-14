@@ -18,17 +18,20 @@
 	import Russia from './regions/Russia.json';
 	import USA from './regions/USA.json';
 	import Vietnam from './regions/Vietnam.json';
-	var regions = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Korea, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
-	var names = [];
-	var tags = true;
-	var mixedAncestries = false;
-	var sampleSize = 25;
-	var allRegionsEnabled;
-	$: allRegionsEnabled = enabledRegions().length == regions.length;
 
-	regions.forEach(region => {
-		region.enabled = true;
-	});
+	const initialData = [ Bangladesh, Brazil, China, Ethiopia, Egypt, India, Indonesia, Japan, Korea, Mexico, Nigeria, Pakistan, Phillipenes, Russia, USA, Vietnam ];
+
+	let regions = $state(initialData.map(region => ({
+		...region,
+		enabled: true,
+	})))
+
+	var names = $state([]);
+	var tags = $state(true);
+	var mixedAncestries = $state(false);
+	var sampleSize = $state(25);
+	var allRegionsEnabled = $derived(enabledRegions().length == regions.length);
+
 	var multiplierTotal = 0;
 	
 	function calcProportion() {
@@ -81,8 +84,8 @@
 				region.enabled = true;
 			});
 		}
-		regions = regions;
 	}
+	
 	
 </script>
 <style>
@@ -141,7 +144,7 @@
 	<div class="flex-row">
 		<div class="left-column">
 			<div class="column-header">
-				<input type="checkbox" checked={allRegionsEnabled} on:click={toggleAllRegions} />
+				<input type="checkbox" checked={allRegionsEnabled} onclick={toggleAllRegions} />
 				<strong>Ancestral origin</strong>
 			</div>
 			{#each regions as region (region.name)}
@@ -152,7 +155,7 @@
 				<input type="number" bind:value={sampleSize} style="width: 4em"/>
 			</label>
 			<label><input type="checkbox" bind:checked={mixedAncestries} /> Mixed ancestries</label>
-			<button on:click={generateNames}>Generate sample</button>
+			<button onclick={generateNames}>Generate sample</button>
 			<div class="error">
 				<span style="color: crimson">//ATTEND//</span> Missing origins detected. Please <a href="https://github.com/DawnPaladin/lancer-name-generator#contributing">install additional origins</a>.
 			</div>

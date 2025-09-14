@@ -1,7 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	export let region;
+	/** @type {{region: any}} */
+	let { region = $bindable() } = $props();
 	
 	function changeCheckbox() {
 		region.enabled = !region.enabled;
@@ -13,6 +14,6 @@
 </script>
 
 <label>
-	<input type="checkbox" bind:checked={region.enabled} on:input={changeCheckbox} />
+	<input type="checkbox" bind:checked={region.enabled} oninput={changeCheckbox} />
 	{region.name}
 </label>
