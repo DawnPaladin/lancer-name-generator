@@ -5,11 +5,9 @@
 	export let tags;
 	export let index;
 
-	if (name.origins[0] == name.origins[1]) {
-		var origin = name.origins[0];
-	} else {
-		var origin = name.origins[0]+'/'+name.origins[1]
-	}
+	$: origin = name.origins[0] === name.origins[1]
+		? name.origins[0]
+		: `${name.origins[0]}/${name.origins[1]}`;
 </script>
 <style>
 	.demographic-tag {
