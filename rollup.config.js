@@ -38,17 +38,6 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
-		json({compact: true}),
-
-		css({ output: 'bundle.css' }),
-		
-		svelte({
-			compilerOptions: {
-				// enable run-time checks when not in production
-				dev: !production
-			}
-		}),
-
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -
@@ -56,18 +45,30 @@ export default {
 		// https://github.com/rollup/plugins/tree/master/packages/commonjs
 		resolve({
 			browser: true,
-			dedupe: ['svelte']
+			dedupe: ['svelte'],
+			exportConditions: ['svelte']
 		}),
 		commonjs(),
 
-		serve(),
+		svelte({
+			compilerOptions: {
+				// enable run-time checks when not in production
+				dev: !production
+			}
+		}),
 
-		livereload('public'),
+		css({ output: 'bundle.css' }),
+		
+		json({ compact: true }),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
-	],
+		// In dev mode, call `npm run start` once the bundle has been generated
+        !production && serve(),
+
+        // Watch the `public` directory and refresh the browser on changes when not in production
+        !production && livereload('public'),
+
+        // If we're building for production (npm run build instead of npm run dev), minify
+        production && terser()	],
 	watch: {
 		clearScreen: false
 	}
